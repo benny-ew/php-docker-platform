@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  apache-php:
+    build: ./apache-php
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "8000:80"
+
+  postgresql:
+    build: ./postgresql
+    env_file:
+     - .env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - ./postgresql/postgresql-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
